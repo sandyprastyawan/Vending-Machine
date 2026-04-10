@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - It's a Lifestyle</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <section class="hero">
+        <div class="overlay"></div>
+
+        <div class="container">
+            <div class="content">
+                <p class="tagline">it's more than a routine</p>
+                <h1>Sanitary On The Go</h1>
+                <p class="description">
+                   SOFTEX menghadirkan kenyamanan yang lebih dari sekadar rutinitas. Temukan kepercayaan diri dalam setiap langkah dengan produk-produk kami yang dirancang untuk memberikan kenyamanan optimal. Karena bagi kami, kenyamanan adalah gaya hidup, bukan hanya kebutuhan sehari-hari.
+                </p>
+                <a href="Menu.php" class="btn-order" id="OrderBtn">Order Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
