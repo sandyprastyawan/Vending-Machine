@@ -1,87 +1,176 @@
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  background: #f5f6f8;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  animation: contentFadeUp 0.8s ease-out;
 }
-
 
 .product-container {
-    display: flex;
-    gap: 20px;
-    max-width: 1000px;
-    width: 90%;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  padding: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('HomepageBG.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-
+/* === CARD === */
 .product-card {
-    flex: 1;
-    padding: 20px;
-    border-right: 1px solid #eeeeee; 
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+  /* Animasi slide up saat muncul */
+  opacity: 0;
+  transform: translateY(60px);
+  animation: slideUpEaseOut 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.product-card:last-child {
-    border-right: none; 
+/* Delay berbeda tiap card agar muncul bergantian */
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.25s; }
+.product-card:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes slideUpEaseOut {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-
-h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    text-transform: uppercase;
+/* Hover card — tetap ada efek angkat */
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .subtitle {
-    color: #888;
-    font-size: 0.8rem;
-    margin-bottom: 20px;
+  color: gray;
+  margin: 5px 0;
 }
 
 .price {
-    background-color: #f8f9fa;
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-bottom: 30px;
+  margin: 10px 0;
+  font-weight: bold;
+  background: #eee;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 6px;
 }
 
-
 .image-wrapper {
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
+  margin: 20px 0;
 }
 
 .image-wrapper img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
+  width: 140px;
+  animation: float 3s ease-in-out infinite;
+  transition: 0.3s;
 }
 
-
-.btn-preorder {
-    background-color: #e2ff00; 
-    border: none;
-    padding: 10px 25px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
+.product-card:hover img {
+  transform: scale(1.1);
 }
 
-.btn-preorder:hover {
-    background-color: #ccff00;
-    transform: scale(1.05);
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* === TOMBOL BELI === */
+.btn-buy {
+  background: #00578E;
+  border: none;
+  padding: 10px 25px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.btn-buy:hover {
+  transform: scale(1.05);
+}
+
+.btn-buy:active {
+  transform: scale(0.9);
+}
+
+.btn-buy::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s;
+}
+
+.btn-buy:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+/* === TRANSITION OVERLAY === */
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #5d7589;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* === PAGE FADE UP === */
+@keyframes contentFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
